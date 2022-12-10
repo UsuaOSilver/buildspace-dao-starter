@@ -1,7 +1,9 @@
-import { useAddress, ConnectWallet, useContract, useNFTBalance } from '@thirdweb-dev/react';
+import { useAddress, ConnectWallet, useContract, useNFTBalance, Web3Button } from '@thirdweb-dev/react';
 import { useState, useEffect, useMemo } from 'react';
 
 const App = () => {
+  
+  // Use the hooks from thirdweb 
   const address = useAddress();
   console.log("👋 Address:", address);
   
@@ -28,12 +30,35 @@ const App = () => {
     );
   }
   
-  // Case 2: Wallet has connected before
+//   // Case 2: Wallet has connected before
+//   return (
+//     <div className='landing'>
+//       <h1>wallet connected, now what!</h1>
+//     </div>
+//   );
+
+
+  // render mint NFT screen
   return (
-    <div className='landing'>
-      <h1>wallet connected, now what!</h1>
+    <div className='mint-nft'>
+      <h1>Mint your free 🍪DAO Membership NFT</h1>
+      <div className='btn-hero'>
+        <Web3Button
+          contractAddress={editionDropAddress}
+          action={contract => {
+            contract.erc1155.claim(0, 1)
+          }}
+          onSuccess={() => {
+            console.log(`🌊 Successfully Minted! Check it out on OpenSea: https://testnets.opensea.io/assets/${editionDrop.getAddress()}/0`);
+          }}
+          onError={error => {
+            console.error("Failed to mint NFT", error);
+          }}
+        >
+          Mint your NFT (FREE)
+        </Web3Button>
+      </div>
     </div>
   );
-};
-
+}
 export default App;
