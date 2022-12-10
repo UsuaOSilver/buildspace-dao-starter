@@ -7,7 +7,7 @@ import { readFileSync } from "fs";
         await editionDrop.createBatch([
             {
                 name: "The Legendary Cup",
-                description: "This NFT will give you access to NarutoDAO!",
+                description: "This NFT will give you access to SaigonDAO!",
                 image: readFileSync("scripts/assets/honda_cup.jpg"),
             },
         ]);
